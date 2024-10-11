@@ -50,7 +50,7 @@ kotlin {
         }
 
         androidMain.dependencies {
-            implementation(kotlin("stdlib-jdk8"))
+            implementation(kotlin("stdlib-jdk11"))
         }
 
         iosMain.dependencies {

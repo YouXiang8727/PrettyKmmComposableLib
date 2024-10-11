@@ -1,0 +1,22 @@
+name: Publish GitHub Packages
+run-name: ${{ github.actor }} is testing out GitHub Packages 🚀
+on: 
+  push: 
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+  
+jobs:          
+  publish:
+    runs-on: macos-latest  # 使用 macOS 來構建 iOS 相關的部分
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Get local.properties from secrets
+        run: echo "${{ secrets.LOCAL_PROPERTIES }}" > $GITHUB_WORKSPACE/local.properties
+      - name: Build the project
+        run: ./gradlew build publish
